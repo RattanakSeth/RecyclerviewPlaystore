@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         //web service test
         loadBooks("http://10.0.2.2/testrcl/testbooks.php", "testing one");
         loadBooks("http://10.0.2.2/testrcl/self_help.php", "Self_help");
+        loadBooks("http://10.0.2.2/elibrary/readingbook.php", "technology");
     }
     ///process of  add data in array
     //1.create sectionModel //to add it to singleitem by using function
