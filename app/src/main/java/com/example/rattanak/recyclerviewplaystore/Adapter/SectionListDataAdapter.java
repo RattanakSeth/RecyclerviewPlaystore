@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.example.rattanak.recyclerviewplaystore.Data.SingleItemModel;
@@ -20,9 +19,15 @@ import java.util.ArrayList;
  */
 
 public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListDataAdapter.SingleItemRowHolder> {
-    private ArrayList<SingleItemModel> itemsList;
+     private ArrayList<SingleItemModel> itemsList;
     //SingleItemModel[] itemsList;
     private Context mContext;
+    public OnRecyclerviewItemClickListener recyclerViewItemClickListener;
+
+    //set click listener to adapt interface and fragment
+    public void setRecyclerViewItemClickListener(OnRecyclerviewItemClickListener itemClickListener){
+        this.recyclerViewItemClickListener = itemClickListener;
+    }
 
     public SectionListDataAdapter(Context context, ArrayList<SingleItemModel> itemsList) {
         this.itemsList = itemsList;
@@ -33,6 +38,12 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
     public void setBook(ArrayList<SingleItemModel> itemsList){
         this.itemsList = itemsList;
         notifyDataSetChanged();
+    }
+
+    public  ArrayList<SingleItemModel> getBooks(int position)
+    {
+        SingleItemModel item = (SingleItemModel)itemsList.get(position);
+        return item;
     }
 
     @Override
@@ -84,7 +95,11 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
                 public void onClick(View v) {
 
 
-                    Toast.makeText(v.getContext(), tvTitle.getText(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(v.getContext(), tvTitle.getText(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(v.getContext(), , Toast.LENGTH_SHORT).show();
+//                    if(recyclerViewItemClickListener != null){
+//                        recyclerViewItemClickListener.onRecyclerViewItemClickListener(getAdapterPosition());
+//                    }
 
                 }
             });

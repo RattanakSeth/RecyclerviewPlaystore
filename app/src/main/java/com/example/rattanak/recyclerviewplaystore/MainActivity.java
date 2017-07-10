@@ -13,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.rattanak.recyclerviewplaystore.Adapter.OnRecyclerviewItemClickListener;
 import com.example.rattanak.recyclerviewplaystore.Adapter.RecyclerViewDataAdapter;
 import com.example.rattanak.recyclerviewplaystore.Adapter.SectionListDataAdapter;
 import com.example.rattanak.recyclerviewplaystore.Data.SectionDataModel;
@@ -25,7 +26,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnRecyclerviewItemClickListener {
     private Toolbar toolbar;
     ArrayList<SectionDataModel> allSampleData;
     ArrayList<SingleItemModel> sampleData;
@@ -192,5 +193,10 @@ public class MainActivity extends AppCompatActivity {
         });
         //add all request to queue
         requestQueue.add(request);
+    }
+
+    @Override
+    public void onRecyclerViewItemClickListener(int position) {
+
     }
 }
