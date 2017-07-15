@@ -22,7 +22,8 @@ import java.util.ArrayList;
 public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDataAdapter.ItemRowHolder>  {
 
     private ArrayList<SectionDataModel> dataList;
-
+    int positionSection;
+    OnRecyclerviewItemClickListener itemClickListener;
     //private SectionDataModel[] dataList;
     private Context mContext;
 
@@ -30,6 +31,11 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
         this.dataList = dataList;
         this.mContext = context;
     }
+
+    public void setRecyclerViewItemClickListener(OnRecyclerviewItemClickListener itemClickListener){
+        this.itemClickListener = itemClickListener;
+    }
+
 
 
 //    public RecyclerViewDataAdapter(Context context, SectionDataModel[] dataList) {
@@ -59,7 +65,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
         itemRowHolder.itemTitle.setText(sectionName);
 
         SectionListDataAdapter itemListDataAdapter = new SectionListDataAdapter(mContext, singleSectionItems);
-
+        itemListDataAdapter.setRecyclerViewItemClickListener(itemClickListener);
         itemRowHolder.recycler_view_list.setHasFixedSize(true);
         itemRowHolder.recycler_view_list.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         itemRowHolder.recycler_view_list.setAdapter(itemListDataAdapter);

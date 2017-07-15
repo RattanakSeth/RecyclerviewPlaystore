@@ -2,6 +2,7 @@ package com.example.rattanak.recyclerviewplaystore.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
  */
 
 public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListDataAdapter.SingleItemRowHolder> {
+    //ArrayList item;
      private ArrayList<SingleItemModel> itemsList;
     //SingleItemModel[] itemsList;
     private Context mContext;
@@ -26,6 +28,7 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
 
     //set click listener to adapt interface and fragment
     public void setRecyclerViewItemClickListener(OnRecyclerviewItemClickListener itemClickListener){
+        Log.d("Book", "setRecyclerViewItemClickListener");
         this.recyclerViewItemClickListener = itemClickListener;
     }
 
@@ -35,15 +38,15 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
         //notifyDataSetChanged();
     }
 
-    public void setBook(ArrayList<SingleItemModel> itemsList){
-        this.itemsList = itemsList;
-        notifyDataSetChanged();
-    }
+//    public void setBook(ArrayList<SingleItemModel> itemsList){
+//        this.itemsList = itemsList;
+//        notifyDataSetChanged();
+//    }
 
-    public  ArrayList<SingleItemModel> getBooks(int position)
+    public  SingleItemModel getBooks(int position, int positionSection)
     {
-        SingleItemModel item = (SingleItemModel)itemsList.get(position);
-        return item;
+
+        return itemsList.get(position);
     }
 
     @Override
@@ -95,7 +98,12 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
                 public void onClick(View v) {
 
 
-                   // Toast.makeText(v.getContext(), tvTitle.getText(), Toast.LENGTH_SHORT).show();
+                   //Toast.makeText(v.getContext(), tvTitle.getText(), Toast.LENGTH_SHORT).show();
+                    Log.d("Book", "setOnClickListener");
+                   SingleItemModel singleItemModel = itemsList.get(getAdapterPosition());
+                   recyclerViewItemClickListener.onRecyclerViewItemClickListener(singleItemModel);
+                   //Toast.makeText(v.getContext(), singleItemModel.toString(),Toast.LENGTH_LONG).show();
+
                    // Toast.makeText(v.getContext(), , Toast.LENGTH_SHORT).show();
 //                    if(recyclerViewItemClickListener != null){
 //                        recyclerViewItemClickListener.onRecyclerViewItemClickListener(getAdapterPosition());

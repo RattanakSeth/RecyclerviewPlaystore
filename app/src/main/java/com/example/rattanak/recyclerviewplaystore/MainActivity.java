@@ -1,5 +1,6 @@
 package com.example.rattanak.recyclerviewplaystore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,10 +27,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements OnRecyclerviewItemClickListener {
+public class MainActivity extends AppCompatActivity implements OnRecyclerviewItemClickListener{
     private Toolbar toolbar;
     ArrayList<SectionDataModel> allSampleData;
-    ArrayList<SingleItemModel> sampleData;
+    //ArrayList<SingleItemModel> sampleData;
     private RecyclerViewDataAdapter adapter;
     private SectionListDataAdapter sectionAdapter;
 
@@ -51,12 +52,16 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerviewIte
         //createDummyData();
 
         //create new section adapter
-        sectionAdapter = new SectionListDataAdapter(this, sampleData);
+//        sectionAdapter = new SectionListDataAdapter(this, sampleData);
+
+//        sectionAdapter.setRecyclerViewItemClickListener(this);
+
         RecyclerView my_recycler_view = (RecyclerView) findViewById(R.id.my_recycler_view);
 
         my_recycler_view.setHasFixedSize(true);
 
         adapter = new RecyclerViewDataAdapter(this, allSampleData);
+        adapter.setRecyclerViewItemClickListener(this);
 
         my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
@@ -177,9 +182,6 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerviewIte
                 //sectionAdapter.setBook(singleItemlist);//on null object
                 dm.setAllItemsInSection(singleItemlist);
                 allSampleData.add(dm);
-                // And then add all single item data to section Data to combine it together
-                //adapter.setBooks(singleItemlist);
-               //Toast.makeText(MainActivity.this, "test it" + singleItemlist, Toast.LENGTH_LONG).show();
 
             }
         }, new Response.ErrorListener(){
@@ -196,7 +198,16 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerviewIte
     }
 
     @Override
-    public void onRecyclerViewItemClickListener(int position) {
+    public void onRecyclerViewItemClickListener(SingleItemModel singleItemModel) {
 
+        //Toast.makeText(MainActivity.this,"sld" + singleItemModel.getBook_name(),Toast.LENGTH_LONG).show();
+        Log.d("Book", "test" + singleItemModel.getBook_name());
+       // SingleItemModel singleItemModel1 =
+        //Log.d("Book", "test" + singleItemModel.ge());
+        Gson gson = new Gson();
+        String serializedBook = gson.toJson(singleItemModel);
+        Intent intent = new Intent(this, BookDetails.class);
+        intent.putExtra("serializedBook", serializedBook);
+        startActivity(intent);
     }
 }
